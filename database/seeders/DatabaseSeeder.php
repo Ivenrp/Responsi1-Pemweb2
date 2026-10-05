@@ -14,6 +14,27 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Admin PustakaKu',
                 'password' => bcrypt('password123'),
+                'role' => 'admin',
+                'email_verified_at' => now(),
+            ]
+        );
+
+        User::updateOrCreate(
+            ['email' => 'staff@pustakaku.test'],
+            [
+                'name' => 'Staff PustakaKu',
+                'password' => bcrypt('password123'),
+                'role' => 'staff',
+                'email_verified_at' => now(),
+            ]
+        );
+
+        User::updateOrCreate(
+            ['email' => 'user@pustakaku.test'],
+            [
+                'name' => 'User Biasa',
+                'password' => bcrypt('password123'),
+                'role' => 'user',
                 'email_verified_at' => now(),
             ]
         );

@@ -25,3 +25,26 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Ignore compiled views
+storage/framework/views/*.php
+!storage/framework/views/.gitignore
+
+# Ignore bootstrap cache
+bootstrap/cache/*.php
+!bootstrap/cache/.gitignore
+
+# Ignore .env
+.env
+
+# Bootstrap cache (ignore file cache, kecuali .gitignore)
+bootstrap/cache/*.php
+!bootstrap/cache/.gitignore
+
+# Storage compiled views
+storage/framework/views/*.php
+!storage/framework/views/.gitignore
+
+# Storage sessions
+storage/framework/sessions/*
+!storage/framework/sessions/.gitignore
