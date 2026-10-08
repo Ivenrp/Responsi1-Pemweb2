@@ -1,26 +1,35 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\BookController;
-use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\LoanController;
-use App\Http\Controllers\Api\MemberController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\MemberController;
+use App\Http\Controllers\Api\LoanController;
 
-// Public routes
-Route::post('/auth/register', [AuthController::class, 'register']);
-Route::post('/auth/login', [AuthController::class, 'login']);
+// Rute Publik (Tidak perlu login/token)
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
-// Protected routes
+// Rute Terlindungi (Wajib pakai Bearer Token Sanctum)
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/auth/logout', [AuthController::class, 'logout']);
-    Route::get('/auth/me', [AuthController::class, 'me']);
+    
+    // Auth Endpoint
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/me', [AuthController::class, 'me']);
 
-    // CRUD API — kasih nama route prefix 'api.' biar nggak konflik dengan web
-    Route::apiResource('books', BookController::class)->names('api.books');
-    Route::apiResource('categories', CategoryController::class)->names('api.categories');
-    Route::apiResource('members', MemberController::class)->names('api.members');
-    Route::apiResource('loans', LoanController::class)->names('api.loans');
+    // Endpoint Kategori & Buku
+    Route::apiResource('categories', CategoryController::class);
+    Route::apiResource('books', BookController::class);
+    
+    // ENDPOINT ANGGOTA (Tugas Javier)
+    // Rute custom (Proses Bisnis) harus diletakkan DI ATAS apiResource
+    // agar URL /members/{member}/suspend tidak tertukar dengan URL CRUD standar
+    Route::patch('/members/{member}/suspend', [MemberController::class, 'suspend']);
+    Route::apiResource('members', MemberController::class);
 
-    Route::post('loans/{loan}/return', [LoanController::class, 'returnBook'])->name('api.loans.return');
+    // Endpoint Peminjaman (Proses bisnis pengembalian buku dan CRUD)
+    Route::post('/loans/{loan}/return', [LoanController::class, 'returnBook']);
+    Route::apiResource('loans', LoanController::class);
 });
