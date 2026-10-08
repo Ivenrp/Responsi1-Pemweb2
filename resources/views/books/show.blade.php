@@ -3,10 +3,14 @@
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800">Detail Buku</h2>
             <div class="space-x-2">
+                @auth
+                @if (in_array(Auth::user()->role, ['admin', 'staff']))
                 <a href="{{ route('books.edit', $book) }}"
-                   class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 text-sm">Edit</a>
+                    class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 text-sm">Edit</a>
+                @endif
+                @endauth
                 <a href="{{ route('books.index') }}"
-                   class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 text-sm">Kembali</a>
+                    class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 text-sm">Kembali</a>
             </div>
         </div>
     </x-slot>
@@ -17,13 +21,13 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
                     <div>
                         @if ($book->cover)
-                            <img src="{{ asset('storage/' . $book->cover) }}"
-                                 alt="{{ $book->title }}"
-                                 class="w-full rounded shadow">
+                        <img src="{{ asset('storage/' . $book->cover) }}"
+                            alt="{{ $book->title }}"
+                            class="w-full rounded shadow">
                         @else
-                            <div class="aspect-[3/4] bg-gray-100 rounded flex items-center justify-center text-gray-400">
-                                No Cover
-                            </div>
+                        <div class="aspect-[3/4] bg-gray-100 rounded flex items-center justify-center text-gray-400">
+                            No Cover
+                        </div>
                         @endif
                     </div>
 
@@ -59,14 +63,17 @@
                         </div>
 
                         @if ($book->description)
-                            <div class="pt-3 border-t">
-                                <h3 class="font-semibold text-gray-700 mb-2">Deskripsi</h3>
-                                <p class="text-gray-600 text-sm">{{ $book->description }}</p>
-                            </div>
+                        <div class="pt-3 border-t">
+                            <h3 class="font-semibold text-gray-700 mb-2">Deskripsi</h3>
+                            <p class="text-gray-600 text-sm">{{ $book->description }}</p>
+                        </div>
                         @endif
                     </div>
                 </div>
 
+                {{-- Riwayat Peminjaman — hanya untuk admin/staff --}}
+                @auth
+                @if (in_array(Auth::user()->role, ['admin', 'staff']))
                 <div class="border-t p-6">
                     <h3 class="font-semibold text-gray-700 mb-3">Riwayat Peminjaman</h3>
                     <div class="overflow-x-auto">
@@ -81,23 +88,25 @@
                             </thead>
                             <tbody class="divide-y">
                                 @forelse ($book->loans as $loan)
-                                    <tr>
-                                        <td class="px-4 py-2">{{ $loan->member->name ?? '-' }}</td>
-                                        <td class="px-4 py-2">{{ $loan->loan_date->format('d M Y') }}</td>
-                                        <td class="px-4 py-2">{{ $loan->due_date->format('d M Y') }}</td>
-                                        <td class="px-4 py-2">{{ ucfirst($loan->status) }}</td>
-                                    </tr>
+                                <tr>
+                                    <td class="px-4 py-2">{{ $loan->member->name ?? '-' }}</td>
+                                    <td class="px-4 py-2">{{ $loan->loan_date->format('d M Y') }}</td>
+                                    <td class="px-4 py-2">{{ $loan->due_date->format('d M Y') }}</td>
+                                    <td class="px-4 py-2">{{ ucfirst($loan->status) }}</td>
+                                </tr>
                                 @empty
-                                    <tr>
-                                        <td colspan="4" class="px-4 py-4 text-center text-gray-500">
-                                            Belum ada peminjaman.
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="4" class="px-4 py-4 text-center text-gray-500">
+                                        Belum ada peminjaman.
+                                    </td>
+                                </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
                 </div>
+                @endif
+                @endauth
             </div>
         </div>
     </div>

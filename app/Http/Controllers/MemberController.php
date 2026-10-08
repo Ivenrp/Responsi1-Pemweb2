@@ -82,4 +82,16 @@ class MemberController extends Controller
         return redirect()->route('members.index')
             ->with('success', 'Anggota berhasil dihapus.');
     }
+
+    public function suspend(Member $member)
+    {
+        $newStatus = $member->status === 'active' ? 'inactive' : 'active';
+        $member->update(['status' => $newStatus]);
+
+        $message = $newStatus === 'active'
+            ? 'Anggota berhasil diaktifkan.'
+            : 'Anggota berhasil di-suspend.';
+
+        return redirect()->route('members.index')->with('success', $message);
+    }
 }

@@ -21,7 +21,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
-    
+
     // User biasa / anggota hanya diizinkan melihat (read-only) daftar buku dan kategori
     Route::get('/books', [BookController::class, 'index']);
     Route::get('/books/{book}', [BookController::class, 'show']);
@@ -33,22 +33,26 @@ Route::middleware('auth:sanctum')->group(function () {
 // 3. RUTE KHUSUS ADMIN (Wajib login + Middleware 'admin')
 // ==========================================
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
-    
+
     // Manajemen Pengguna & Role (Eksklusif Admin untuk kelola staff/admin)
     Route::get('/users', [UserController::class, 'index']);
     Route::patch('/users/{user}/role', [UserController::class, 'updateRole']);
 
     // Fitur Anggota & Proses Bisnis Suspend (Tugas Javier)
     Route::patch('/members/{member}/suspend', [MemberController::class, 'suspend']);
-    Route::apiResource('members', MemberController::class);
+    Route::apiResource('members', MemberController::class)->names('api.members');
 
     // Manajemen Kategori (Admin bisa tambah, edit, hapus)
-    Route::apiResource('categories', CategoryController::class)->except(['index', 'show']);
+    Route::apiResource('categories', CategoryController::class)
+        ->except(['index', 'show'])
+        ->names('api.categories');   // ← FIX: nama unik, biar nggak bentrok web
 
     // Manajemen Buku (Admin bisa tambah, edit, hapus)
-    Route::apiResource('books', BookController::class)->except(['index', 'show']);
+    Route::apiResource('books', BookController::class)
+        ->except(['index', 'show'])
+        ->names('api.books');        // ← FIX: nama unik, biar nggak bentrok web
 
     // Manajemen Peminjaman & Pengembalian Buku
     Route::post('/loans/{loan}/return', [LoanController::class, 'returnBook']);
-    Route::apiResource('loans', LoanController::class);
+    Route::apiResource('loans', LoanController::class)->names('api.loans');
 });
