@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\MemberController;
 use App\Http\Controllers\Api\LoanController;
+use App\Http\Controllers\Api\UserController;
 
 // ==========================================
 // 1. RUTE PUBLIK (Tidak perlu login)
@@ -33,7 +34,11 @@ Route::middleware('auth:sanctum')->group(function () {
 // ==========================================
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     
-    // Fitur Anggota & Proses Bisnis Suspend (Tugas Javier - Hanya Admin yang bisa atur anggota)
+    // Manajemen Pengguna & Role (Eksklusif Admin untuk kelola staff/admin)
+    Route::get('/users', [UserController::class, 'index']);
+    Route::patch('/users/{user}/role', [UserController::class, 'updateRole']);
+
+    // Fitur Anggota & Proses Bisnis Suspend (Tugas Javier)
     Route::patch('/members/{member}/suspend', [MemberController::class, 'suspend']);
     Route::apiResource('members', MemberController::class);
 

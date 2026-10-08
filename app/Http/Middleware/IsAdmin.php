@@ -10,11 +10,11 @@ class IsAdmin
 {
     public function handle(Request $request, Closure $next): Response
     {
-        // Cek apakah user yang sedang login punya role 'admin'
-        if ($request->user() && $request->user()->role !== 'admin') {
+        // Izinkan jika user adalah 'admin' atau 'staff'
+        if (!$request->user() || !in_array($request->user()->role, ['admin', 'staff'])) {
             return response()->json([
-                'message' => 'Akses ditolak. Fitur ini hanya dapat diakses oleh Admin.'
-            ], 403); // 403 Forbidden artinya dilarang masuk
+                'message' => 'Akses ditolak. Fitur ini hanya untuk Admin atau Staff.'
+            ], 403); // 403 Forbidden
         }
 
         return $next($request);
