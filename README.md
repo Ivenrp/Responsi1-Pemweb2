@@ -4,8 +4,8 @@
 ---
 
 ## 📌 Informasi Kelompok
-- **Nomor Kelompok:** [Isi Nomor Kelompokmu]
-- **Shift Praktikum:** [Isi Shift Praktikummu]
+- **Nomor Kelompok:** [3]
+- **Shift Praktikum:** [C]
 
 ---
 
@@ -14,7 +14,7 @@
 | No | Nama Lengkap | NIM | Shift Awal | Shift Akhir | Jobdesk / Kontribusi | Link Video Penjelasan |
 |---|---|---|---|---|---|---|
 | 1 | Iven Rival Pangestu | H1H024013 | A | C | Setup + Auth + CRUD Buku & Kategori + API Books & Categories | https://youtu.be/isCqwNeAPhw |
-| 2 | Javier Anthonio Justiansah | [Isi NIM] | [Shift] | [Shift] | CRUD Peminjaman + API Loans | [YouTube/Drive](https://...) |
+| 2 | Javier Anthonio Justiansah | [H1H024026] | [Shift A] | [Shift C] | Backend API (CRUD Anggota & Suspend Logic) + Middleware IsAdmin + Role Management | [YouTube](https://youtu.be/8vjm3727pw8) |
 | 3 | Pandu Adi Utama | [Isi NIM] | [Shift] | [Shift] | Frontend Integration (Role UI & Routing) + Dashboard + CRUD Anggota | [YouTube/Drive](https://...) |
 
 ---
