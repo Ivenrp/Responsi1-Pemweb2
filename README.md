@@ -14,8 +14,8 @@
 | No | Nama Lengkap | NIM | Shift Awal | Shift Akhir | Jobdesk / Kontribusi | Link Video Penjelasan |
 |---|---|---|---|---|---|---|
 | 1 | Iven Rival Pangestu | H1H024013 | A | C | Setup + Auth + CRUD Buku & Kategori + API Books & Categories | https://youtu.be/isCqwNeAPhw |
-| 2 | Javier Anthonio Justiansah | [H1H024026] | [Shift A] | [Shift C] | Backend API (CRUD Anggota & Suspend Logic) + Middleware IsAdmin + Role Management | [https://youtu.be/8vjm3727pw8]|
-| 3 | Pandu Adi Utama | [Isi NIM] | [Shift] | [Shift] | Frontend Integration (Role UI & Routing) + Dashboard + CRUD Anggota | [YouTube/Drive](https://...) |
+| 2 | Javier Anthonio Justiansah | [H1H024026] | A | C | Backend API (CRUD Anggota & Suspend Logic) + Middleware IsAdmin + Role Management | https://youtu.be/8vjm3727pw8 |
+| 3 | Pandu Adi Utama | [Isi NIM] | A | C | Frontend Integration (Role UI & Routing) + Dashboard + CRUD Anggota | https://drive.google.com/drive/folders/1e1aPEms229LGfnEJxuzHONP4IlHfDyDg?usp=drive_link |
 
 ---
 
