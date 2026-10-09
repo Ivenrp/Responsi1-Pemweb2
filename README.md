@@ -13,7 +13,7 @@
 
 | No | Nama Lengkap | NIM | Shift Awal | Shift Akhir | Jobdesk / Kontribusi | Link Video Penjelasan |
 |---|---|---|---|---|---|---|
-| 1 | Iven Rival Pangestu | H1H024013 | [Shift] | [Shift] | Setup + Auth + CRUD Buku & Kategori + API Books & Categories | [YouTube/Drive](https://...) |
+| 1 | Iven Rival Pangestu | H1H024013 | A | C | Setup + Auth + CRUD Buku & Kategori + API Books & Categories | https://youtu.be/isCqwNeAPhw |
 | 2 | Javier Anthonio Justiansah | [Isi NIM] | [Shift] | [Shift] | CRUD Peminjaman + API Loans | [YouTube/Drive](https://...) |
 | 3 | Pandu Adi Utama | [Isi NIM] | [Shift] | [Shift] | Frontend Integration (Role UI & Routing) + Dashboard + CRUD Anggota | [YouTube/Drive](https://...) |
 
